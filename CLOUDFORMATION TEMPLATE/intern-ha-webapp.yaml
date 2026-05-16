@@ -191,16 +191,42 @@ Resources:
             yum install -y nginx
             systemctl start nginx
             systemctl enable nginx
-            INSTANCE_ID=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
-            AZ=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone)
-            cat > /usr/share/nginx/html/index.html <<HTMLEOF
-            <html><body style="background:#1a1a2e;color:white;text-align:center;padding:60px;font-family:Arial">
-            <h1 style="color:#00d4ff">CitiusCloud HA Web App</h1>
-            <p>Instance ID: <b>$INSTANCE_ID</b></p>
-            <p>Availability Zone: <b>$AZ</b></p>
-            <p>Refresh to see load balancing!</p>
-            </body></html>
+
+            # Enable IMDSv2 token
+            TOKEN=$(curl -s -X PUT "http://169.254.169.254/latest/api/token" \
+              -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
+
+            # Get metadata using token
+            INSTANCE_ID=$(curl -s -H "X-aws-ec2-metadata-token: $TOKEN" \
+              http://169.254.169.254/latest/meta-data/instance-id)
+              AZ=$(curl -s -H "X-aws-ec2-metadata-token: $TOKEN" \
+              http://169.254.169.254/latest/meta-data/placement/availability-zone)
+
+            # Write webpage
+            cat > /usr/share/nginx/html/index.html << 'HTMLEOF'
+            <!DOCTYPE html>
+            <html>
+              <head><title>CitiusCloud HA App</title></head>
+                <body style="background:#1a1a2e;color:white;text-align:center;
+                font-family:Arial;padding:60px">
+                <h1 style="color:#00d4ff"> CitiusCloud HA Web App</h1>
+                <p>This page is served by an EC2 instance behind an ALB</p>
+                <div style="background:#16213e;padding:20px;border-radius:10px; display:inline-block;margin:10px">
+                  <p style="color:#aaa;font-size:12px">Instance ID</p>
+                  <p style="font-size:22px;font-weight:bold">INSTANCE_ID_HERE</p>
+                </div>
+                <div style="background:#16213e;padding:20px;border-radius:10px; display:inline-block;margin:10px">
+                  <p style="color:#aaa;font-size:12px">Availability Zone</p>
+                  <p style="font-size:22px;font-weight:bold">AZ_HERE</p>
+                </div>
+                <p style="color:#00d4ff">Refresh to see load balancing! ↻</p>
+                </body>
+            </html>
             HTMLEOF
+
+# Replace placeholders with actual values
+sed -i "s/INSTANCE_ID_HERE/$INSTANCE_ID/g" /usr/share/nginx/html/index.html
+sed -i "s/AZ_HERE/$AZ/g" /usr/share/nginx/html/index.html
 
   # ─── AUTO SCALING GROUP ────────────────────────────────
   AutoScalingGroup:
