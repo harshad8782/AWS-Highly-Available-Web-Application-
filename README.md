@@ -5,33 +5,6 @@
 
 ---
 
-## 📋 Table of Contents
-
-- [Architecture Overview](#architecture-overview)
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Part 1 – Infrastructure Setup](#part-1--infrastructure-setup)
-  - [VPC](#1-custom-vpc)
-  - [Subnets](#2-subnets)
-  - [Internet Gateway](#3-internet-gateway)
-  - [NAT Gateway](#4-nat-gateway)
-  - [Route Tables](#5-route-tables)
-  - [Security Groups](#6-security-groups)
-- [Part 2 – Application Layer](#part-2--application-layer)
-  - [EC2 Launch Template](#7-ec2-launch-template)
-  - [Target Group](#8-target-group)
-  - [Application Load Balancer](#9-application-load-balancer)
-  - [Auto Scaling Group](#10-auto-scaling-group)
-- [Validation & Testing](#validation--testing)
-  - [Check 1 – Load Balancing](#check-1--load-balancing-works)
-  - [Check 2 – Auto Scaling Self-Healing](#check-2--auto-scaling-self-healing)
-  - [Check 3 – Private Subnets Are Private](#check-3--private-subnets-are-private)
-  - [Check 4 – Least-Privilege Security Groups](#check-4--least-privilege-security-groups)
-- [CloudFormation Template](#cloudformation-template)
-- [Teardown](#teardown)
-
----
-
 ## 🏗️ Architecture Overview
 
 ```
