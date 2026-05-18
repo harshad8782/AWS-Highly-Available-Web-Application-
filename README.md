@@ -7,30 +7,9 @@
 
 ## 🏗️ Architecture Overview
 
-```
-                        🌍 Internet
-                             │
-                             ▼
-                 ┌─── intern-alb (ALB) ───┐
-                 │   Internet-facing       │
-                 │   public-subnet-1       │
-                 │   public-subnet-2       │
-                 └────────────┬───────────┘
-                              │
-              ┌───────────────┴───────────────┐
-              ▼                               ▼
-   ┌─── EC2 + NGINX ──┐           ┌─── EC2 + NGINX ──┐
-   │  private-subnet-1│           │  private-subnet-2│
-   │   ap-south-1a    │           │   ap-south-1b    │
-   └──────────────────┘           └──────────────────┘
-              │                               │
-              └───────────────┬───────────────┘
-                              ▼
-                    NAT Gateway (public-subnet-1)
-                              │
-                              ▼
-                    Internet Gateway (intern-igw)
-```
+![Architecture Diagram](screenshot/aws_ha_architecture_diagram.png)
+
+![Flow Diagram](screenshot/aws_request_flow_diagram.png)
 
 **VPC CIDR:** `10.0.0.0/16`  
 **Region:** `ap-south-1` (Mumbai)  
