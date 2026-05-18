@@ -5,15 +5,13 @@
 
 ---
 
-## 🏗️ Architecture Overview
+## Architecture Overview
 
 ![Architecture Diagram](screenshot/aws_ha_architecture_diagram.png)
 
-![Flow Diagram](screenshot/aws_request_flow_diagram.png)
+## Flow Diagram
 
-**VPC CIDR:** `10.0.0.0/16`  
-**Region:** `ap-south-1` (Mumbai)  
-**Availability Zones:** `ap-south-1a` + `ap-south-1b`
+![Flow Diagram](screenshot/aws_request_flow_diagram.png)
 
 ---
 
