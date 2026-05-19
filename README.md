@@ -1,7 +1,7 @@
 # 🚀 Highly-Available Web Application on AWS
 
 > **CitiusCloud Services LLP – AWS Intern Hands-On Task**  
-> Deployed a production-style, highly available web application on AWS demonstrating end-to-end skills across VPC networking, compute, load balancing, auto scaling, and security best practices.
+> Deployed a production-style, highly available web application on AWS demonstrating end-to-end skills across VPC networking, compute, load balancing, auto scaling, and security best practices, This is only for learning and demostrating purpose only.
 
 ---
 
